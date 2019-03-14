@@ -14,20 +14,17 @@ namespace geojson
     {
         static void Main(string[] args)
         {
-            
             var pos = new GeoJSON.Net.Geometry.Position(59.264577437894914, 15.27211594029649);
-
             var kommun = WhereIsPoint(pos);
 
-            System.Console.WriteLine($"{kommun.Name}, {kommun.Id}");
-
+            Console.WriteLine($"{kommun.Name}, {kommun.Code}");
             Console.WriteLine("Done");
         }
 
         public class Kommun
         {
             public string Name;
-            public string Id;
+            public string Code;
         }
 
         public static Kommun WhereIsPoint(Position pos)
@@ -51,7 +48,7 @@ namespace geojson
                             {
                                 return new Kommun {
                                     Name = feat.Properties["name"].ToString(),
-                                    Id = feat.Properties["code"].ToString()
+                                    Code = feat.Properties["code"].ToString()
                                 };
                             }
                         }
@@ -64,7 +61,7 @@ namespace geojson
                 // Fallback if no kommun is found
                 return new Kommun {
                     Name = "Stockholms stad",
-                    Id = "0180"
+                    Code = "0180"
                 };
             } 
         }
